@@ -34,18 +34,24 @@ def main():
         "Host" : "m.cloud.189.cn",
         "Accept-Encoding" : "gzip, deflate",
     }
-    response = s.get(url,headers=headers)
+    # 抽奖1
+    response = s.get(url, headers=headers)
     if ("errorCode" in response.text):
         print(response.text)
-    else:
+    elif 'description' in response.text:
         description = response.json()['description']
         print(f"抽奖获得{description}")
-    response = s.get(url2,headers=headers)
+    else:
+        print(response.text)
+    # 抽奖2
+    response = s.get(url2, headers=headers)
     if ("errorCode" in response.text):
         print(response.text)
-    else:
+    elif 'description' in response.text:
         description = response.json()['description']
         print(f"抽奖获得{description}")
+    else:
+        print(response.text)
 
 BI_RM = list("0123456789abcdefghijklmnopqrstuvwxyz")
 def int2char(a):
